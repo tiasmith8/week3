@@ -3,22 +3,19 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace BankTellerExercise.Classes
-{  //A checkingAccount is subclass of the class BankAccount
-   // Bankaccount is also the superclass to checkingAccount
-
+{   // A CheckingAccount is subclass of the BankAccount class
+    // BankAccount is also the superclass to CheckingAccount
     public class CheckingAccount : BankAccount
     {
-
         //set up class properties and methods
-        ///extending functionality special to a checking account.
-        ///but in this case, in order to do this, we are actually
-        ///overriding the withdraw method in BankAccount
-        ///
+        //extending functionality special to a checking account.
+        //but in this case, in order to do this, we are actually
+        //overriding the withdraw method in BankAccount
+
         public override decimal Withdraw(decimal amountToWithdraw)
         {
             //if .Balance<0, withdraw $10 overdraft fee 
             //from the account
-
 
             //if checking Balance == -100, it fails and balance
             //remains same. Balance comes from the superclass 
@@ -33,13 +30,7 @@ namespace BankTellerExercise.Classes
                 return newAccountBalance;
             }
             return base.Withdraw(amountToWithdraw);
-
         }
-
-       
-
-
     }
-
 }
 
