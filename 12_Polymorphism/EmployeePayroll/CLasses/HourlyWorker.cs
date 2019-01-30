@@ -7,6 +7,9 @@ namespace EmployeePayroll.CLasses
     public class HourlyWorker : IWorker
     {
         //Properties
+        /// <summary>
+        /// Hourly rate of worker.
+        /// </summary>
         public double HourlyRate { get; }
 
         /// <summary>

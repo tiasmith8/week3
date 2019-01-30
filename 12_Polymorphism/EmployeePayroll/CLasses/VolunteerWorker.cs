@@ -16,6 +16,11 @@ namespace EmployeePayroll.CLasses
         /// </summary>
         public string LastName { get; }
 
+        /// <summary>
+        /// Calculate volunteer's worker weekly pay of $0.
+        /// </summary>
+        /// <param name="hoursWorked"></param>
+        /// <returns></returns>
         public double CalculateWeeklyPay(int hoursWorked)
         {
             return hoursWorked * 0;
@@ -31,7 +36,5 @@ namespace EmployeePayroll.CLasses
             this.FirstName = firstName;
             this.LastName = lastName;
         }
-
-
     }
 }
