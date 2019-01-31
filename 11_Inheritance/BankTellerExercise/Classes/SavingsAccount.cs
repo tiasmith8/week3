@@ -10,7 +10,6 @@ namespace BankTellerExercise.Classes
     public class SavingsAccount : BankAccount
     {
         //Properties inherited from BankAccount
-
         //Methods
         /// <summary>
         /// If the balance is less than $150 charge $2
@@ -21,7 +20,7 @@ namespace BankTellerExercise.Classes
         public override decimal Withdraw(decimal amountToWithdraw)
         {
             //If withdraw is requested for > balance
-            if(amountToWithdraw > this.Balance)
+            if(amountToWithdraw < 0 || amountToWithdraw > this.Balance)
             {
                 return this.Balance;
             }

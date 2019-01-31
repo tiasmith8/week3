@@ -10,10 +10,12 @@ namespace BankTellerExercise.Classes
         /// returns account number that the account belongs to
         /// </summary>
         public string AccountNumber { get; set; }
+        
         /// <summary>
         /// returns the Balance value of the Bank account in USD
         /// </summary>
         public decimal Balance { get; private set; }
+        
         /// <summary>
         /// Adds amount to deposit to the current balance, and 
         /// returns the new balance of the bank account
@@ -22,9 +24,15 @@ namespace BankTellerExercise.Classes
         /// <returns></returns>
         public decimal Deposit(decimal amountToDeposit)
         {
+            if(amountToDeposit < 0)
+            {
+                return this.Balance;
+            }
+
             this.Balance = this.Balance + amountToDeposit;
             return this.Balance;
         }
+        
         /// <summary>
         /// Subtracts amount to withdraw from the current
         /// balance, and returns the new balance of the
@@ -37,6 +45,7 @@ namespace BankTellerExercise.Classes
             this.Balance = this.Balance - amountToWithdraw;
             return this.Balance; 
         }
+        
         /// <summary>
         /// Withdraws transferAmount from the Account and deposits
         /// it into destinationAccount
@@ -48,6 +57,7 @@ namespace BankTellerExercise.Classes
             this.Balance = this.Balance - transferAmount;
             destinationAccount.Balance += transferAmount; 
         }
+        
         ///A new bank account's balance is defaulted to
         ///a zero balance
         public BankAccount()

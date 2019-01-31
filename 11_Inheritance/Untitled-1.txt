@@ -1,0 +1,17 @@
+create resume with lines and table maybe
+you can use color in contact info and the subject.
+veranda works for font too
+nothing smaller than 10
+nothing bigger than 12 for fonts
+.NET and SQL always all caps
+3-6 bullets max
+*put professional experience last
+put technical skills, education and technical skills before that
+resume summery will be a condensed elevator pitch.
+Vending machine application. National Parks Application.
+add relevant experience (add back internship)
+"reduced processing time by 75%" - use that as an example to use percentages/numbers/improvements
+don't put periods after bullets
+they send a showcase page out to employers
+Save as a google doc as well. It's similar to ms word.
+save resume as firstNameLastName and move old resumes
