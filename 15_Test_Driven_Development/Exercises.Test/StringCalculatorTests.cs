@@ -78,5 +78,21 @@ namespace Exercises.Test
             Assert.AreEqual(10, actual, "5\n3,2 should return 10");
 
         }
+
+        [TestMethod]
+        public void StringCalculator_Test_For_Input_Delimiter()
+        {
+            //Arrange
+            StringCalculator unitTest = new StringCalculator();
+
+            //Act
+            int actual = unitTest.Add("//;\n1;2");
+
+            //Assert
+            Assert.AreEqual(10, actual, "//;\n1;2 should return 3");
+
+        }
+
+
     }
 }
