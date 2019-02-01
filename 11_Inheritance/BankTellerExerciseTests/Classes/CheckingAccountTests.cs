@@ -1,13 +1,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BankTellerExercise.Classes;
 
-namespace BankTellerExerciseTests
+namespace BankTellerExerciseTests.Classes
 {
     [TestClass]
     public class CheckingAccountTests
     {
-
-
         [TestMethod]
         public void CheckingAccountTest_ForDepositingNegativeMoney()
         {
@@ -19,7 +17,6 @@ namespace BankTellerExerciseTests
 
             //Assert
             Assert.AreEqual(0, deposit, "Cannot deposit negative money.");
-
         }
 
         [TestMethod]
@@ -33,7 +30,6 @@ namespace BankTellerExerciseTests
 
             //Assert
             Assert.AreEqual(0, balance, "Cannot withdraw negative money.");
-
         }
 
         [TestMethod]
@@ -49,7 +45,6 @@ namespace BankTellerExerciseTests
             //Assert
             Assert.AreEqual(checkingAccountTransferFrom.Balance, -100, "Decrement balance from 0 to -100");
             Assert.AreEqual(accountTransferTo.Balance, 100, "Received $100 transfer.");
-
         }
     }
 }
