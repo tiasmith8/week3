@@ -38,6 +38,19 @@ namespace Exercises.Test
 
         }
 
+        [TestMethod]
+        public void StringCalculator_TestString12()
+        {
+            //Arrange
+            StringCalculator unitTest = new StringCalculator();
+
+            //Act
+            int actual = unitTest.Add("1,2");
+
+            //Assert
+            Assert.AreEqual(3, actual, "1,2 should return 3");
+        }
+
 
     }
 }

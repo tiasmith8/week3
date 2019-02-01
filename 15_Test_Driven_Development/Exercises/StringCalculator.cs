@@ -4,50 +4,36 @@ using System.Text;
 
 namespace Exercises
 {
+    //"1,2"
     public class StringCalculator
     {
         public int Add(string numbers)
+
         {
+            int sum = 0;
             
-            if (numbers == "")
+            //testing for more than two numbers by means of string length
+            if (numbers.Length >= 1)
+            {
+                //string[] numbersBrokenOut = numbers.Split(',');
+
+                // loop resulting string from split
+                foreach (string element in numbers.Split(','))
+                {
+                    sum += int.Parse(element);
+                }
+                return sum;
+            }
+
+           
+            else
+           
             {
                 return 0;
             }
-            else
-            {
-                return 1;
-            }
-            
-
-            //take string numbers
-            //split it into new array
-
-            //int sum = 0;
-            //if (numbers.Length > 1)
-            //{
-            //    string[] numbersBrokenOut = numbers.Split(',');
-
-            //    // loop resulting string from split
-            //    foreach (string element in numbersBrokenOut)
-            //    {
 
 
-
-            //        sum += int.Parse(element);
-            //    }
-
-            //}
-            //else
-            //{
-            //    sum = int.Parse(numbers);
-            //}
-
-            ////return output
-            //return sum;
-            
         }
-
-
 
     }
 }
