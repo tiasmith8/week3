@@ -64,5 +64,19 @@ namespace Exercises.Test
             Assert.AreEqual(6, actual, "1,2,3 should return 6");
 
         }
+
+        [TestMethod]
+        public void StringCalculator_TestWithNewLineCharsAndCommas()
+        {
+            //Arrange
+            StringCalculator unitTest = new StringCalculator();
+
+            //Act
+            int actual = unitTest.Add("5\n3,2");
+
+            //Assert
+            Assert.AreEqual(10, actual, "5\n3,2 should return 10");
+
+        }
     }
 }

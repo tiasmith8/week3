@@ -8,15 +8,15 @@ namespace Exercises
     public class StringCalculator
     {
         public int Add(string numbers)
-
         {
             int sum = 0;
             
             //testing for more than two numbers by means of string length
             if (numbers.Length >= 1)
             {
+                //Split based on \n and ,
                 // loop resulting string from split
-                foreach (string element in numbers.Split(','))
+                foreach (string element in numbers.Split(',', '\n'))
                 {
                     sum += int.Parse(element);
                 }
