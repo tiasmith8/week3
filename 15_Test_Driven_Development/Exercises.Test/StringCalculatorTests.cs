@@ -51,6 +51,18 @@ namespace Exercises.Test
             Assert.AreEqual(3, actual, "1,2 should return 3");
         }
 
+        [TestMethod]
+        public void StringCalculator_TestStringMultipleNumbers()
+        {
+            //Arrange
+            StringCalculator unitTest = new StringCalculator();
 
+            //Act
+            int actual = unitTest.Add("1,2,3");
+
+            //Assert
+            Assert.AreEqual(6, actual, "1,2,3 should return 6");
+
+        }
     }
 }

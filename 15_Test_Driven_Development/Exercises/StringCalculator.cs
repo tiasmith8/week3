@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Exercises
 {
-    //"1,2"
+    //Calculates sum of 2 or or more integers from a string
     public class StringCalculator
     {
         public int Add(string numbers)
@@ -15,8 +15,6 @@ namespace Exercises
             //testing for more than two numbers by means of string length
             if (numbers.Length >= 1)
             {
-                //string[] numbersBrokenOut = numbers.Split(',');
-
                 // loop resulting string from split
                 foreach (string element in numbers.Split(','))
                 {
@@ -24,16 +22,10 @@ namespace Exercises
                 }
                 return sum;
             }
-
-           
             else
-           
             {
                 return 0;
             }
-
-
         }
-
     }
 }
