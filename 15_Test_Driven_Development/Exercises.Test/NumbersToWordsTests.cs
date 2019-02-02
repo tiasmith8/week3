@@ -42,7 +42,17 @@ namespace Exercises.Test
             Assert.AreEqual(expected, actual, message);
         }
 
-
+        //3 digit numbers (two hundred and nine, three hundred, four hundred and ninety-eight)
+        [DataTestMethod]
+        [DataRow(100, "one hundred", "100 returns one hundred")]
+        [DataRow(209, "two hundred and nine", "209 returns two hundred and nine")]
+        [DataRow(498, "four hundred and ninety-eight")]
+        public void Convert_Triple_Digit_Numbers_To_Words(int num, string expected, string message)
+        {
+            NumbersToWords ntw = new NumbersToWords();
+            string actual = ntw.Convert(num);
+            Assert.AreEqual(expected, actual, message);
+        }
 
     }
 }
