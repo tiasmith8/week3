@@ -21,7 +21,16 @@ namespace Exercises.Test
             Assert.AreEqual("zero", word, "0 returns zero");
         }
 
-
+        [DataTestMethod]
+        [DataRow(1, "one", "1 returns one")]
+        [DataRow(7, "seven", "7 returns seven")]
+        [DataRow(9, "nine", "9 returns nine")]
+        public void Convert_Single_Digit_Numbers_To_Words(int num, string expected, string message)
+        {
+            NumbersToWords ntw = new NumbersToWords();
+            string actual = ntw.Convert(num);
+            Assert.AreEqual(expected, actual, message);
+        }
 
     }
 }
