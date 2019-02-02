@@ -86,8 +86,6 @@ namespace Exercises.Test
             StringCalculator unitTest = new StringCalculator();
 
             //Act
-            //int actual = unitTest.Add("//;\n1;2");
-            //int actual = unitTest.Add("//;7\n1,2");
             int actual = unitTest.Add("//;\n1;2");
 
             //Assert
@@ -95,6 +93,17 @@ namespace Exercises.Test
 
         }
 
+        [DataTestMethod]
+        [DataRow("//!\n4!9", 13, "//!\n4!9 should return 13")]
+        [DataRow("3\n5\n2,6", 14, "/3\n5\n2,6 should return 14")]
+        [DataRow("3,5,9", 17, "3,5,9 should return 17")]
+        public void CalculateExceptions(string input, int expected, string message)
+        {
+            StringCalculator sct = new StringCalculator();
+            int actual = sct.Add(input);
+            Assert.AreEqual(expected, actual, message);
+
+        }
 
     }
 }
