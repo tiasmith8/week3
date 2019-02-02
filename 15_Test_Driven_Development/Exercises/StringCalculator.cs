@@ -15,7 +15,6 @@ namespace Exercises
             //If string is not empty
             if (numbers.Length >= 1)
             {
-                //Input //;\n1;2 should return 3
                 //If string is 3 or more characters
                 if (numbers.Length > 2 && numbers.StartsWith("//"))
                 {   //If the string starts with the delimeter marker
@@ -30,10 +29,7 @@ namespace Exercises
                 return sum;
             }
             //String is empty, so return 0
-            else
-            {
-                return sum;
-            }
+            return sum;
         }
     }
 }
