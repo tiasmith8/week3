@@ -10,48 +10,26 @@ namespace Exercises
         public int Add(string numbers)
         {
             int sum = 0;
-            string delimeterFedIn;
-            char delimeterChar;
+            char delimeterChar=',';
 
-            //testing for more than two numbers by means of string length
+            //If string is not empty
             if (numbers.Length >= 1)
             {
-                //Test for - //;\n1;2 should return 3
-                //Assuming at least 3 characters
-                if(numbers.Length > 2)
-                {
-                    string firstThree = numbers.Substring(0, 3);
-                    char[] characterArrayDelimiter;
-
-                    if (firstThree.Substring(0,2).Equals("//"))
-                    {
-                        //String representation
-                        delimeterFedIn = firstThree.Substring(2);
-                        //Convert a string of length 1 to a character
-                        characterArrayDelimiter = delimeterFedIn.ToCharArray();
-                        delimeterChar = Convert.ToChar(delimeterFedIn);
-
-                    }
-                    numbers.Split()
-                    foreach (string element in numbers.Split(',', , '\n'))
-                    {
-                        sum += int.Parse(element);
-                    }
-                    return sum;
-
-
-
+                //Input //;\n1;2 should return 3
+                //If string is 3 or more characters
+                if (numbers.Length > 2 && numbers.StartsWith("//"))
+                {   //If the string starts with the delimeter marker
+                    delimeterChar = numbers[2];
+                    numbers = sum + numbers.Substring(3);
                 }
-                
-
-                //Split based on \n and ,
-                // loop resulting string from split
-                foreach (string element in numbers.Split(',', '\n'))
+                foreach (string element in numbers.Split(delimeterChar, '\n'))
                 {
                     sum += int.Parse(element);
                 }
+
                 return sum;
             }
+            //String is empty, so return 0
             else
             {
                 return sum;
