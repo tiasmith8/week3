@@ -31,6 +31,18 @@ namespace Exercises.Test
             string actual = ntw.Convert(num);
             Assert.AreEqual(expected, actual, message);
         }
+        [DataTestMethod]
+        [DataRow(10, "ten", "10 returns ten")]
+        [DataRow(14, "fourteen", "14 returns fourteen")]
+        [DataRow(26, "twenty-six", "26 returns twenty-six")]
+        public void Convert_Double_Digit_Numbers_To_Words(int num, string expected, string message)
+        {
+            NumbersToWords ntw = new NumbersToWords();
+            string actual = ntw.Convert(num);
+            Assert.AreEqual(expected, actual, message);
+        }
+
+
 
     }
 }
