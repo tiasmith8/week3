@@ -14,17 +14,26 @@ namespace Exercises.Test
             WordsToNumbers zeroConversion = new WordsToNumbers();
             int actual = zeroConversion.Convert("zero");
             Assert.AreEqual(0, actual, "zero returns 0");
-            
         }
 
         [DataTestMethod]
-        [DataRow(1, "one", "1 returns one")]
-        [DataRow(10, "ten", "10 returns ten")]
-        [DataRow(20, "twenty", "20 returns twenty")]
-        public void Convert_Under_21_To_Words(int num, string expected, string message)
+        [DataRow("one", 1, "1 returns one")]
+        [DataRow("ten", 10, "10 returns ten")]
+        [DataRow("twenty", 20, "20 returns twenty")]
+        public void Convert_Under_21_To_Words(string num, int expected, string message)
         {
-            NumbersToWords ntw = new NumbersToWords();
-            string actual = ntw.Convert(num);
+            WordsToNumbers ntw = new WordsToNumbers();
+            int actual = ntw.Convert(num);
+            Assert.AreEqual(expected, actual, message);
+        }
+
+        [DataTestMethod]
+        [DataRow("twenty-one", 21, "21 returns twenty-one")]
+        [DataRow("thirty-five", 35, "35 returns thirty-five")]
+        public void Convert_2_Digit_Words(string num, int expected, string message)
+        {
+            WordsToNumbers ntw = new WordsToNumbers();
+            int actual = ntw.Convert(num);
             Assert.AreEqual(expected, actual, message);
         }
 
