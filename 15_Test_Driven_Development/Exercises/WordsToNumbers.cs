@@ -8,8 +8,27 @@ namespace Exercises
     {
         public int Convert(string number)
         {
+            int sum = 0;
+            //Under 21
+            if(dictNumsToWords.ContainsKey(number))
+            {
+                return dictNumsToWords[number];
+            }
 
-            return dictNumsToWords[number];
+            //Over twenty-one", 21
+            else //Split the 2 digit number
+            {
+                string[] split2DigitNumber = number.Split("-");
+                foreach (string s in split2DigitNumber)
+                {
+                    sum += dictNumsToWords[s];
+                }
+
+            }
+
+
+
+            return sum;
 
         }
 
