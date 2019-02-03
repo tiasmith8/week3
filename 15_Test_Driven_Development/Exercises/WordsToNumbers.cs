@@ -10,88 +10,156 @@ namespace Exercises
         {
             int sum = 0;
 
-            //5 digits
-            //"forty thousand", 40000,
-            //eighty-seven thousand and six hundred and fifty-four", 87654
-            if (number.Contains("thousand"))
+            //6 digits
+            //nine hundred and ninety-nine thousand and nine hundred and ninety-nine", 999999
+            if (number.Contains("thousand") && number.Contains("hundred"))
             {
                 string[] thousand = number.Split(" thousand");
-                if (thousand[0].Contains('-'))
+                if (thousand[0].Contains("hundred")){
+                    sum+= Convert3Digits(thousand[0]) * 1000;
+                }
+                else if(dictNumsToWords.ContainsKey(thousand[0]))
                 {
-                    sum+= Convert2Digits(thousand[0]) * 1000;     
+                    sum += ConvertUnder21(thousand[0]) * 1000; ;
                 }
                 else
                 {
-                    sum += ConvertUnder21(thousand[0]) * 1000;
+                    sum += Convert2Digits(thousand[0]) * 1000; ;
                 }
-                if(thousand[1].Length>0)
-                {
-                    number = thousand[1].Substring(5);
-                }
-                else
-                {
-                    return sum;
-                }
-                
-                if (number.Contains(" hundred and "))
-                {   //		number	"six hundred and fifty-four"	string
 
-                    string[] hundred = number.Split(" hundred and ");
-                    sum += dictNumsToWords[hundred[0]] * 100;
-                    number = hundred[1];
-                }
-                if(number.Contains('-'))
+
+
+                //sum += Convert3Digits(thousand[0]) * 1000;
+                if (thousand[1].Length == 0)
                 {
-                    sum += Convert2Digits(number);
+                    return sum;
                 }
                 else
                 {
-                    sum += ConvertUnder21(number);
-                }
+                    thousand[1] = thousand[1].Substring(5);
+                    sum += Convert3Digits(thousand[1]);
                     return sum;
-                
+                }
             }
+
+            //5-digits
+            //eighty-seven thousand and six hundred and fifty-four", 87654
+            else if (number.Contains("thousand"))
+            {
+                string[] thousand2 = number.Split(" thousand");
+                if(dictNumsToWords.ContainsKey(thousand2[0]))
+                {
+                    sum += dictNumsToWords[thousand2[0]] *1000;
+                    if(thousand2[1] == "")//if no more words
+                    {
+                        return sum;
+                    }
+                }
+                else
+                {
+                    sum+= Convert2Digits(thousand2[1]) * 1000;
+                }
+
+                //sum += Convert3Digits(thousand2[0]) * 1000;
+                if (thousand2[1].Length == 0)
+                {
+                    return sum;
+                }
+                else
+                {
+                    thousand2[1] = thousand2[1].Substring(5);
+
+                    if(dictNumsToWords.ContainsKey(thousand2[1]))
+                    {
+                        sum += ConvertUnder21(thousand2[1]);
+                        return sum;
+                    }
+                    else if(thousand2[1].Contains("-") && !thousand2[1].Contains("and"))
+                    {
+                        sum += Convert2Digits(thousand2[1]);
+                        return sum;
+                    }
+                    sum += Convert3Digits(thousand2[1]);
+                    return sum;
+                }
+
+            }
+
+
+                //if(thousand[0].Contains(" hundred"))
+                //{
+                //    string[] first3Split = thousand[0].Split(" hundred");
+                //    sum += ConvertUnder21(first3Split[0]) * 100000;
+                //    if(thousand[1].Length>0)
+                //    {
+                //        number = thousand[1].Substring(5);
+                //        sum+=Convert3Digits(number);
+
+                //        if (thousand[1].Contains('-'))
+                //        {
+                //            sum += Convert2Digits(thousand[1]) * 1000;
+                //        }
+                //        else
+                //        {
+                //            sum += ConvertUnder21(thousand[1]) * 1000;
+                //        }
+                //    }
+                //    return sum;
+                //}
+
+
+
+            //    if (thousand[0].Contains('-'))
+            //    {
+            //        sum+= Convert2Digits(thousand[0]) * 1000;     
+            //    }
+            //    else
+            //    {
+            //        sum += ConvertUnder21(thousand[0]) * 1000;
+            //    }
+            //    if(thousand[1].Length>0)
+            //    {
+            //        number = thousand[1].Substring(5);
+            //    }
+            //    else
+            //    {
+            //        return sum;
+            //    }
+                
+            //    if (number.Contains(" hundred and "))
+            //    {   //		number	"six hundred and fifty-four"	string
+
+            //        string[] hundred = number.Split(" hundred and ");
+            //        sum += dictNumsToWords[hundred[0]] * 100;
+            //        number = hundred[1];
+            //    }
+            //    if(number.Contains('-'))
+            //    {
+            //        sum += Convert2Digits(number);
+            //    }
+            //    else
+            //    {
+            //        sum += ConvertUnder21(number);
+            //    }
+            //        return sum;
+                
+            //}
 
                 //4 digits
                 //three thousand and four", 3004
                 //five thousand and twenty-six", 5026
                 //seven thousand and one hundred and eleven", 7111
-            if (number.Contains(" thousand and "))
+            else if (number.Contains(" thousand and "))
             {
                 string[] thousand = number.Split(" thousand");
                 sum += dictNumsToWords[thousand[0]] * 1000;
-                if (thousand[1].Contains("hundred"))
-                {
-                    thousand[1] = thousand[1].Substring(4);
-                    thousand = thousand[1].Split(" hundred ");
-                    sum += dictNumsToWords[thousand[0]] * 100;
-                    number = thousand[1].Substring(4);
-                }
-                if (number.Contains('-'))
-                {
-                    sum += Convert2Digits(thousand[1].Substring(4));
-                }
-                else if(thousand[1].Length>0)
-                {
-                    sum += ConvertUnder21(thousand[1].Substring(4));
-                }
-
+                sum+=Convert3Digits(number);
             }
 
             //3 digits
             else if (number.Contains("hundred"))
             {
-                sum += ConvertUnder21(number.Substring(0, number.IndexOf(' '))) * 100;
-                if (number.Contains("-"))
-                {
-                    number = number.Substring(number.LastIndexOf(' ') + 1);
-                    sum += Convert2Digits(number);
-                }
-                else if(number.Contains("and"))
-                {
-                    number = number.Substring(number.LastIndexOf(' ') + 1);
-                    sum += ConvertUnder21(number);
-                }
+                sum += Convert3Digits(number);
             }
 
 
@@ -107,6 +175,26 @@ namespace Exercises
                 sum += ConvertUnder21(number);
             }
 
+
+            return sum;
+
+        }
+
+        public int Convert3Digits(string number)
+        {
+            int sum = 0;
+
+            sum += ConvertUnder21(number.Substring(0, number.IndexOf(' '))) * 100;
+            if (number.Contains("-"))
+            {
+                number = number.Substring(number.LastIndexOf(' ') + 1);
+                sum += Convert2Digits(number);
+            }
+            else if (number.Contains("and"))
+            {
+                number = number.Substring(number.LastIndexOf(' ') + 1);
+                sum += ConvertUnder21(number);
+            }
 
             return sum;
 
@@ -166,7 +254,5 @@ namespace Exercises
             dictNumsToWords.Add("eighty", 80);
             dictNumsToWords.Add("ninety", 90);
         }
-
-
     }
 }
