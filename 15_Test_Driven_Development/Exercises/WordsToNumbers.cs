@@ -23,10 +23,7 @@ namespace Exercises
                 {
                     sum += dictNumsToWords[s];
                 }
-
             }
-
-
 
             return sum;
 

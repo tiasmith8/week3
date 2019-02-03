@@ -28,9 +28,20 @@ namespace Exercises.Test
         }
 
         [DataTestMethod]
-        [DataRow("twenty-one", 21, "21 returns twenty-one")]
-        [DataRow("thirty-five", 35, "35 returns thirty-five")]
+        [DataRow("twenty-one", 21, "twenty-one returns 21")]
+        [DataRow("thirty-five", 35, "thirty-five returns 35")]
         public void Convert_2_Digit_Words(string num, int expected, string message)
+        {
+            WordsToNumbers ntw = new WordsToNumbers();
+            int actual = ntw.Convert(num);
+            Assert.AreEqual(expected, actual, message);
+        }
+
+        [DataTestMethod]
+        [DataRow("one hundred", 100, "one hundred returns 100")]
+        [DataRow("four hundred and ninety-eight", 498, "four hundred and ninety-eight returns 498")]
+        [DataRow("two hundred and nine", 209, "two hundred and nine returns 209")]
+        public void Convert_3_Digit_Words(string num, int expected, string message)
         {
             WordsToNumbers ntw = new WordsToNumbers();
             int actual = ntw.Convert(num);
