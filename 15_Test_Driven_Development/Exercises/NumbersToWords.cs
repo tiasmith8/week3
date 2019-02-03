@@ -64,7 +64,7 @@ namespace Exercises
         //Method to calculate words for 3 digits
         public string CalculateThreeDigits(int number)
         {
-            return number % 100 == 0 ? dictNumsToWords[number / 100] + " hundred" : dictNumsToWords[number / 100] + " hundred" + " and " + CalculateOneOrTwoDigits(number % 100);
+            return number % 100 == 0 ? dictNumsToWords[number / 100] + " hundred" : number % 100 != 0 && number / 100 != 0 ? dictNumsToWords[number / 100] + " hundred" + " and " + CalculateOneOrTwoDigits(number % 100) : CalculateOneOrTwoDigits(number % 100);
         }
     }
 }
