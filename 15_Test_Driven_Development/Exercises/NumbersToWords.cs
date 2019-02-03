@@ -59,15 +59,50 @@ namespace Exercises
             dictNumsToWords.Add(80, "eighty");
             dictNumsToWords.Add(90, "ninety");
 
-            //Create a stack
-            //Queue<string> wordsQueue = new Queue<string>();
+            //5-digits
+            if (number.ToString().Length == 5)
+            {
+                //5-digit number 87_654 => forty thousand
+                digitFive = number / 1000;
+                if (number % 1000 == 0 || digitFive < 21)
+                {
+                    wordConcat += dictNumsToWords[digitFive] + " thousand";
+                }
+                else
+                {   
+                    wordConcat += dictNumsToWords[digitFive-digitFive % 10] + "-"
+                        + dictNumsToWords[digitFive % 10] + " thousand";
+                }
+                digitThree = int.Parse(number.ToString().Substring(2)) / 100; //657
+                if (digitThree != 0)
+                {
+                    wordConcat += " and " + dictNumsToWords[digitThree] + " hundred";
+                }
+                digitTwo = int.Parse(number.ToString().Substring(3)) / 10; //33
+                if (digitTwo != 0 && int.Parse(number.ToString().Substring(2)) > 21)
+                {
+                    wordConcat += " and " + dictNumsToWords[digitTwo * 10] + "-"; //30
+                }
+                if (int.Parse(number.ToString().Substring(3)) < 21 && int.Parse(number.ToString().Substring(3))>0) //less than 21
+                {
+                    wordConcat += " and " + dictNumsToWords[int.Parse(number.ToString().Substring(3))];
+                    return wordConcat;
+                }
+                digitOne = int.Parse(number.ToString().Substring(4));
+                if (digitOne != 0)
+                {
+                    wordConcat += dictNumsToWords[digitOne];
+                }
+            }
+
 
             //4-digit length
-            if(number.ToString().Length ==4)
+            if (number.ToString().Length == 4)
             {
                 //4-digit numbers 3004 : three thousand and four
                 digitFour = number / 1000;
                 wordConcat = dictNumsToWords[digitFour] + " thousand";
+            
                 //3333 - operate on next 3 digits
                 digitThree = int.Parse(number.ToString().Substring(1)) / 100; //333
                 if (digitThree != 0)
