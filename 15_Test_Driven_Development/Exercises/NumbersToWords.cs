@@ -8,7 +8,9 @@ namespace Exercises
     {
         public string Convert(int number)
         {
-            int partialNum = 0;
+            int firstDigit = 0;
+            int secondDigit = 0;
+            int thirdDigit = 0;
             string wordConcat = "";
             //Convert single digit numbers to words
             Dictionary<int, string> dictNumsToWords = new Dictionary<int, string>();
@@ -42,21 +44,46 @@ namespace Exercises
             dictNumsToWords.Add(60, "sixty");
             dictNumsToWords.Add(70, "seventy");
             dictNumsToWords.Add(80, "eighty");
-            dictNumsToWords.Add(90, "ninty");
-            //dictNumsToWords.Add(100, "one hundred");
-
+            dictNumsToWords.Add(90, "ninety");
             //check if the value is in the dictionary
             if(dictNumsToWords.ContainsKey(number))
             {
                 return dictNumsToWords[number];
             }
-            //26 (2-digit numbers)
+            //(2-digit numbers)
             else if(number > 20 && number < 100)
             {
-                partialNum = number / 10 * 10;
-                int remainder = number % 10;
+                firstDigit = number / 10 * 10;
+                secondDigit = number % 10;
+                wordConcat = dictNumsToWords[firstDigit] + "-" + dictNumsToWords[secondDigit];
+            }
+            //Triple digits
+            else if(number >= 100)
+            {
+                firstDigit = number / 100; //4
+                secondDigit = number % 100;//98
+                if(secondDigit == 0)
+                {
+                    wordConcat = dictNumsToWords[firstDigit] + " hundred";
+                }
+                else if(secondDigit < 21)
+                {
+                    wordConcat = dictNumsToWords[firstDigit] + " hundred and "
+                        + dictNumsToWords[secondDigit];
+                }
+                else //secondDigit is greater than 20
+                {
+                    thirdDigit = secondDigit / 10 * 10;//90
+                    secondDigit = secondDigit % 10;//8
+                    wordConcat = dictNumsToWords[firstDigit] + " hundred and " +
+                        dictNumsToWords[thirdDigit] + "-" + dictNumsToWords[secondDigit];
+                        //98
+                    
 
-                wordConcat = dictNumsToWords[partialNum] + "-" + dictNumsToWords[remainder];
+
+
+                }
+                
             }
 
 

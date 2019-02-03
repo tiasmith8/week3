@@ -46,7 +46,8 @@ namespace Exercises.Test
         [DataTestMethod]
         [DataRow(100, "one hundred", "100 returns one hundred")]
         [DataRow(209, "two hundred and nine", "209 returns two hundred and nine")]
-        [DataRow(498, "four hundred and ninety-eight")]
+        [DataRow(498, "four hundred and ninety-eight", "498 returns four hundred and ninety-eight")]
+        [DataRow(951, "nine hundred and fifty-one", "951 returns nine hundred and fifty-one")]
         public void Convert_Triple_Digit_Numbers_To_Words(int num, string expected, string message)
         {
             NumbersToWords ntw = new NumbersToWords();
