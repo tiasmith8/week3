@@ -50,8 +50,8 @@ namespace Exercises
             if (number.ToString().Length == 4)//4-digits
                 return number % 1000 < 100 ? dictNumsToWords[number / 1000] + " thousand" + " and " + CalculateOneOrTwoDigits(number % 1000) : dictNumsToWords[number / 1000] + " thousand" + " and " + CalculateThreeDigits(number % 1000);
             if(number.ToString().Length < 3) //1 or 2 digits
-                return CalculateOneOrTwoDigits(number); //3 digits
-            else //if(number >= 100 && number <=999)
+                return CalculateOneOrTwoDigits(number);
+            else //3 digits
                 return CalculateThreeDigits(number);
         }
 
