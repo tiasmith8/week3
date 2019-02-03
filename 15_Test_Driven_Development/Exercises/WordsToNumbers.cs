@@ -9,25 +9,64 @@ namespace Exercises
         public int Convert(string number)
         {
             int sum = 0;
-            //Under 21
-            if(dictNumsToWords.ContainsKey(number))
-            {
-                return dictNumsToWords[number];
-            }
 
-            //Over twenty-one", 21
-            else //Split the 2 digit number
+            //3 digits
+            //one hundred", 100
+            //two hundred and nine", 209
+            //four hundred and ninety-eight", 498
+            if(number.Contains("hundred"))
             {
-                string[] split2DigitNumber = number.Split("-");
-                foreach (string s in split2DigitNumber)
+                sum = ConvertUnder21(number.Substring(0, number.IndexOf(' '))) * 100;
+                if (number.Contains("-"))
                 {
-                    sum += dictNumsToWords[s];
+                    number = number.Substring(number.LastIndexOf(' ') + 1);
+                    sum += Convert2Digits(number);
+                }
+                else if(number.Contains("and"))
+                {
+                    number = number.Substring(number.LastIndexOf(' ') + 1);
+                    sum += ConvertUnder21(number);
                 }
             }
+
+
+            //Over twenty-one", 21
+            else if (number.Contains('-'))//Split the 2 digit number
+            {
+                sum = Convert2Digits(number);
+            }
+
+            //Under 21
+            else //(dictNumsToWords.ContainsKey(number))
+            {
+                return ConvertUnder21(number);
+            }
+
 
             return sum;
 
         }
+
+        public int Convert2Digits(string number)
+        {
+            int sum = 0;
+            string[] split2DigitNumber = number.Split("-");
+            foreach (string s in split2DigitNumber)
+            {
+                sum += dictNumsToWords[s];
+            }
+
+            return sum;
+        }
+
+        public int ConvertUnder21(string number)
+        {
+            return dictNumsToWords[number];
+        }
+
+
+
+
 
 
         //Create dictionary
