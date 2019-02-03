@@ -8,11 +8,24 @@ namespace Exercises
     {
         public string Convert(int number)
         {
+            //passing 6 digits gets into long territory
+            int digitOne = 0;
+            int digitTwo = 0;
+            int digitThree = 0;
+            int digitFour = 0;
+            int digitFive = 0;
+            int digitSix = 0;
+
+
             int firstDigit = 0;
             int secondDigit = 0;
             int thirdDigit = 0;
+            int fourthDigit = 0;
+            int fifthDigit = 0;
+            int sixthDigit = 0;
             string wordConcat = "";
-            //Convert single digit numbers to words
+
+            //Create dictionary
             Dictionary<int, string> dictNumsToWords = new Dictionary<int, string>();
 
             //Add values for 0-19
@@ -36,8 +49,8 @@ namespace Exercises
             dictNumsToWords.Add(17, "seventeen");
             dictNumsToWords.Add(18, "eighteen");
             dictNumsToWords.Add(19, "nineteen");
-            //20, 30, 40, 50, 60, 70, 80, 90
             dictNumsToWords.Add(20, "twenty");
+            //30, 40, 50, 60, 70, 80, 90
             dictNumsToWords.Add(30, "thirty");
             dictNumsToWords.Add(40, "forty");
             dictNumsToWords.Add(50, "fifty");
@@ -45,8 +58,42 @@ namespace Exercises
             dictNumsToWords.Add(70, "seventy");
             dictNumsToWords.Add(80, "eighty");
             dictNumsToWords.Add(90, "ninety");
-            //check if the value is in the dictionary
-            if(dictNumsToWords.ContainsKey(number))
+
+            //Create a stack
+            //Queue<string> wordsQueue = new Queue<string>();
+
+            //4-digit length
+            if(number.ToString().Length ==4)
+            {
+                //4-digit numbers 3004 : three thousand and four
+                digitFour = number / 1000;
+                wordConcat = dictNumsToWords[digitFour] + " thousand";
+                //3333 - operate on next 3 digits
+                digitThree = int.Parse(number.ToString().Substring(1)) / 100; //333
+                if (digitThree != 0)
+                {
+                    wordConcat += " and " + dictNumsToWords[digitThree] + " hundred";
+                }
+                digitTwo = int.Parse(number.ToString().Substring(2)) / 10; //33
+                if (digitTwo != 0 && int.Parse(number.ToString().Substring(2)) > 21)
+                {
+                    wordConcat += " and " + dictNumsToWords[digitTwo* 10] + "-"; //30
+                }
+                if(int.Parse(number.ToString().Substring(2)) < 21) //less than 21
+                {
+                    wordConcat += " and " + dictNumsToWords[int.Parse(number.ToString().Substring(2))];
+                    return wordConcat;
+                }
+                digitOne = int.Parse(number.ToString().Substring(3));
+                if(digitOne != 0)
+                {
+                    wordConcat += dictNumsToWords[digitOne];
+                }
+            }
+
+
+            //Check if the value is in the dictionary
+            if (dictNumsToWords.ContainsKey(number))
             {
                 return dictNumsToWords[number];
             }
@@ -58,7 +105,7 @@ namespace Exercises
                 wordConcat = dictNumsToWords[firstDigit] + "-" + dictNumsToWords[secondDigit];
             }
             //Triple digits
-            else if(number >= 100)
+            else if(number >= 100 && number <=999)
             {
                 firstDigit = number / 100; //4
                 secondDigit = number % 100;//98
@@ -71,25 +118,18 @@ namespace Exercises
                     wordConcat = dictNumsToWords[firstDigit] + " hundred and "
                         + dictNumsToWords[secondDigit];
                 }
-                else //secondDigit is greater than 20
+                else if(secondDigit > 21)//secondDigit is greater than 20
                 {
                     thirdDigit = secondDigit / 10 * 10;//90
                     secondDigit = secondDigit % 10;//8
                     wordConcat = dictNumsToWords[firstDigit] + " hundred and " +
                         dictNumsToWords[thirdDigit] + "-" + dictNumsToWords[secondDigit];
-                        //98
-                    
-
-
-
                 }
-                
             }
-
-
 
             return wordConcat;
         }
+
 
 
 
