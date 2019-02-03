@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Exercises
 {
     public class NumbersToWords
     {
-
         //Create dictionary
         Dictionary<int, string> dictNumsToWords = new Dictionary<int, string>();
 
@@ -44,161 +41,30 @@ namespace Exercises
             dictNumsToWords.Add(90, "ninety");
         }
 
-
-
         public string Convert(int number)
         {
-            //passing 6 digits gets into long territory
-            int digitOne = 0;
-            int digitTwo = 0;
-            int digitThree = 0;
-            int digitFour = 0;
-            int digitFive = 0;
-            int digitSix = 0;
-
-            int firstDigit = 0;
-            int secondDigit = 0;
-            string wordConcat = "";
-
-
-            //6-digits
-            //500000, "five hundred thousand
-            //803308, "eight hundred and three thousand and three hundred and eight
-            //999999, "nine hundred and ninety-nine thousand and nine-hundred and ninety-nine
-            if(number.ToString().Length == 6)
-            {
-                digitSix = number / 100000; //500
-                wordConcat = CalculateThreeDigits(int.Parse(number.ToString().Substring(0,3))) + " thousand";
-                if(int.Parse(number.ToString().Substring(3)) != 0)
-                {
-                    wordConcat += " and " + CalculateThreeDigits(int.Parse(number.ToString().Substring(3)));
-                }
-                
-
-
-
-            }
-
-
-
-            //5-digits
-            if (number.ToString().Length == 5)
-            {
-                //5-digit number 87_654 => forty thousand
-                digitFive = number / 1000;
-                if (number % 1000 == 0 || digitFive < 21)
-                {
-                    wordConcat += dictNumsToWords[digitFive] + " thousand";
-                }
-                else
-                {   
-                    wordConcat += dictNumsToWords[digitFive-digitFive % 10] + "-"
-                        + dictNumsToWords[digitFive % 10] + " thousand";
-                }
-                digitThree = int.Parse(number.ToString().Substring(2)) / 100; //657
-                if (digitThree != 0)
-                {
-                    wordConcat += " and " + dictNumsToWords[digitThree] + " hundred";
-                }
-                digitTwo = int.Parse(number.ToString().Substring(3)) / 10; //33
-                if (digitTwo != 0 && int.Parse(number.ToString().Substring(2)) > 21)
-                {
-                    wordConcat += " and " + dictNumsToWords[digitTwo * 10] + "-"; //30
-                }
-                if (int.Parse(number.ToString().Substring(3)) < 21 && int.Parse(number.ToString().Substring(3))>0) //less than 21
-                {
-                    wordConcat += " and " + dictNumsToWords[int.Parse(number.ToString().Substring(3))];
-                    return wordConcat;
-                }
-                digitOne = int.Parse(number.ToString().Substring(4));
-                if (digitOne != 0)
-                {
-                    wordConcat += dictNumsToWords[digitOne];
-                }
-            }
-
-
-            //4-digit length
-            if (number.ToString().Length == 4)
-            {
-                //4-digit numbers 3004 : three thousand and four
-                digitFour = number / 1000;
-                wordConcat = dictNumsToWords[digitFour] + " thousand";
-            
-                //3333 - operate on next 3 digits
-                digitThree = int.Parse(number.ToString().Substring(1)) / 100; //333
-                if (digitThree != 0)
-                {
-                    wordConcat += " and " + dictNumsToWords[digitThree] + " hundred";
-                }
-                digitTwo = int.Parse(number.ToString().Substring(2)) / 10; //33
-                if (digitTwo != 0 && int.Parse(number.ToString().Substring(2)) > 21)
-                {
-                    wordConcat += " and " + dictNumsToWords[digitTwo* 10] + "-"; //30
-                }
-                if(int.Parse(number.ToString().Substring(2)) < 21) //less than 21
-                {
-                    wordConcat += " and " + dictNumsToWords[int.Parse(number.ToString().Substring(2))];
-                    return wordConcat;
-                }
-                digitOne = int.Parse(number.ToString().Substring(3));
-                if(digitOne != 0)
-                {
-                    wordConcat += dictNumsToWords[digitOne];
-                }
-            }
-
-
-            //Check if the value is in the dictionary
-            if (dictNumsToWords.ContainsKey(number))
-            {
-                return dictNumsToWords[number];
-            }
-            //(2-digit numbers)
-            else if(number > 20 && number < 100)
-            {
-                firstDigit = number / 10 * 10;
-                secondDigit = number % 10;
-                wordConcat = dictNumsToWords[firstDigit] + "-" + dictNumsToWords[secondDigit];
-            }
-            //Triple digits
-            else if(number >= 100 && number <=999)
-            {
-
+            if(number.ToString().Length == 6) //6-digits
+                return int.Parse(number.ToString().Substring(3)) == 0 ? CalculateThreeDigits(int.Parse(number.ToString().Substring(0, 3))) + " thousand" : CalculateThreeDigits(int.Parse(number.ToString().Substring(0, 3))) + " thousand" + " and " + CalculateThreeDigits(int.Parse(number.ToString().Substring(3)));
+            if (number.ToString().Length == 5) //5-digits
+                return int.Parse(number.ToString().Substring(2)) == 0 ? CalculateOneOrTwoDigits(int.Parse(number.ToString().Substring(0, 2))) + " thousand" : CalculateOneOrTwoDigits(int.Parse(number.ToString().Substring(0, 2))) + " thousand" + " and " + CalculateThreeDigits(int.Parse(number.ToString().Substring(2)));
+            if (number.ToString().Length == 4)//4-digits
+                return number % 1000 < 100 ? dictNumsToWords[number / 1000] + " thousand" + " and " + CalculateOneOrTwoDigits(number % 1000) : dictNumsToWords[number / 1000] + " thousand" + " and " + CalculateThreeDigits(number % 1000);
+            if(number.ToString().Length < 3) //1 or 2 digits
+                return CalculateOneOrTwoDigits(number); //3 digits
+            else //if(number >= 100 && number <=999)
                 return CalculateThreeDigits(number);
-
-            }
-
-            return wordConcat;
         }
 
+        //Method to calculate words for 1 or 2 digit number
+        public string CalculateOneOrTwoDigits(int number)
+        {
+            return dictNumsToWords.ContainsKey(number) ? dictNumsToWords[number] : dictNumsToWords[number / 10 * 10] + "-" + dictNumsToWords[number % 10];
+        }
+
+        //Method to calculate words for 3 digits
         public string CalculateThreeDigits(int number)
         {
-            int firstDigit = number / 100; //4
-            int secondDigit = number % 100;//98
-            string wordConcat = "";
-
-            if (secondDigit == 0)
-            {
-                wordConcat = dictNumsToWords[firstDigit] + " hundred";
-            }
-            else if (secondDigit < 21)
-            {
-                wordConcat = dictNumsToWords[firstDigit] + " hundred and "
-                    + dictNumsToWords[secondDigit];
-            }
-            else if (secondDigit > 21)//secondDigit is greater than 20
-            {
-                int thirdDigit = secondDigit / 10 * 10;//90
-                secondDigit = secondDigit % 10;//8
-                wordConcat = dictNumsToWords[firstDigit] + " hundred and " +
-                    dictNumsToWords[thirdDigit] + "-" + dictNumsToWords[secondDigit];
-            }
-
-            return wordConcat;
+            return number % 100 == 0 ? dictNumsToWords[number / 100] + " hundred" : dictNumsToWords[number / 100] + " hundred" + " and " + CalculateOneOrTwoDigits(number % 100);
         }
-
-
-
     }
 }
