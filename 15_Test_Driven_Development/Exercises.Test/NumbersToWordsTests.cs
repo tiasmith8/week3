@@ -85,7 +85,7 @@ namespace Exercises.Test
         [DataTestMethod]
         [DataRow(500000, "five hundred thousand", "500_000 returns five hundred thousand")]
         [DataRow(803308, "eight hundred and three thousand and three hundred and eight", "eight hundred and three thousand and three hundred and eight")]
-        [DataRow(999999, "nine hundred and ninety-nine thousand and nine-hundred and ninety-nine", "nine hundred and ninety-nine thousand and nine-hundred and ninety-nine")]
+        [DataRow(999999, "nine hundred and ninety-nine thousand and nine hundred and ninety-nine", "nine hundred and ninety-nine thousand and nine hundred and ninety-nine")]
         public void Convert_6_Digit_Numbers_To_Words(int num, string expected, string message)
         {
             NumbersToWords ntw = new NumbersToWords();

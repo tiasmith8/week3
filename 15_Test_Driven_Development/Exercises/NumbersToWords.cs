@@ -6,28 +6,12 @@ namespace Exercises
 {
     public class NumbersToWords
     {
-        public string Convert(int number)
+
+        //Create dictionary
+        Dictionary<int, string> dictNumsToWords = new Dictionary<int, string>();
+
+        public NumbersToWords()
         {
-            //passing 6 digits gets into long territory
-            int digitOne = 0;
-            int digitTwo = 0;
-            int digitThree = 0;
-            int digitFour = 0;
-            int digitFive = 0;
-            int digitSix = 0;
-
-
-            int firstDigit = 0;
-            int secondDigit = 0;
-            int thirdDigit = 0;
-            int fourthDigit = 0;
-            int fifthDigit = 0;
-            int sixthDigit = 0;
-            string wordConcat = "";
-
-            //Create dictionary
-            Dictionary<int, string> dictNumsToWords = new Dictionary<int, string>();
-
             //Add values for 0-19
             dictNumsToWords.Add(0, "zero");
             dictNumsToWords.Add(1, "one");
@@ -58,6 +42,44 @@ namespace Exercises
             dictNumsToWords.Add(70, "seventy");
             dictNumsToWords.Add(80, "eighty");
             dictNumsToWords.Add(90, "ninety");
+        }
+
+
+
+        public string Convert(int number)
+        {
+            //passing 6 digits gets into long territory
+            int digitOne = 0;
+            int digitTwo = 0;
+            int digitThree = 0;
+            int digitFour = 0;
+            int digitFive = 0;
+            int digitSix = 0;
+
+            int firstDigit = 0;
+            int secondDigit = 0;
+            string wordConcat = "";
+
+
+            //6-digits
+            //500000, "five hundred thousand
+            //803308, "eight hundred and three thousand and three hundred and eight
+            //999999, "nine hundred and ninety-nine thousand and nine-hundred and ninety-nine
+            if(number.ToString().Length == 6)
+            {
+                digitSix = number / 100000; //500
+                wordConcat = CalculateThreeDigits(int.Parse(number.ToString().Substring(0,3))) + " thousand";
+                if(int.Parse(number.ToString().Substring(3)) != 0)
+                {
+                    wordConcat += " and " + CalculateThreeDigits(int.Parse(number.ToString().Substring(3)));
+                }
+                
+
+
+
+            }
+
+
 
             //5-digits
             if (number.ToString().Length == 5)
@@ -142,29 +164,39 @@ namespace Exercises
             //Triple digits
             else if(number >= 100 && number <=999)
             {
-                firstDigit = number / 100; //4
-                secondDigit = number % 100;//98
-                if(secondDigit == 0)
-                {
-                    wordConcat = dictNumsToWords[firstDigit] + " hundred";
-                }
-                else if(secondDigit < 21)
-                {
-                    wordConcat = dictNumsToWords[firstDigit] + " hundred and "
-                        + dictNumsToWords[secondDigit];
-                }
-                else if(secondDigit > 21)//secondDigit is greater than 20
-                {
-                    thirdDigit = secondDigit / 10 * 10;//90
-                    secondDigit = secondDigit % 10;//8
-                    wordConcat = dictNumsToWords[firstDigit] + " hundred and " +
-                        dictNumsToWords[thirdDigit] + "-" + dictNumsToWords[secondDigit];
-                }
+
+                return CalculateThreeDigits(number);
+
             }
 
             return wordConcat;
         }
 
+        public string CalculateThreeDigits(int number)
+        {
+            int firstDigit = number / 100; //4
+            int secondDigit = number % 100;//98
+            string wordConcat = "";
+
+            if (secondDigit == 0)
+            {
+                wordConcat = dictNumsToWords[firstDigit] + " hundred";
+            }
+            else if (secondDigit < 21)
+            {
+                wordConcat = dictNumsToWords[firstDigit] + " hundred and "
+                    + dictNumsToWords[secondDigit];
+            }
+            else if (secondDigit > 21)//secondDigit is greater than 20
+            {
+                int thirdDigit = secondDigit / 10 * 10;//90
+                secondDigit = secondDigit % 10;//8
+                wordConcat = dictNumsToWords[firstDigit] + " hundred and " +
+                    dictNumsToWords[thirdDigit] + "-" + dictNumsToWords[secondDigit];
+            }
+
+            return wordConcat;
+        }
 
 
 
