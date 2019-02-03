@@ -10,13 +10,35 @@ namespace Exercises
         {
             int sum = 0;
 
-            //3 digits
-            //one hundred", 100
-            //two hundred and nine", 209
-            //four hundred and ninety-eight", 498
-            if(number.Contains("hundred"))
+            //4 digits
+            //three thousand and four", 3004
+            //five thousand and twenty-six", 5026
+            //seven thousand and one hundred and eleven", 7111
+            if(number.Contains("thousand"))
             {
-                sum = ConvertUnder21(number.Substring(0, number.IndexOf(' '))) * 100;
+                string[] thousand = number.Split(" thousand and ");
+                sum += dictNumsToWords[thousand[0]] * 1000;
+                if (thousand[1].Contains("hundred"))
+                {
+                    thousand = thousand[1].Split(" hundred and ");
+                    sum += dictNumsToWords[thousand[0]] * 100;
+                    number = thousand[1];
+                }
+                if (number.Contains('-'))
+                {
+                    sum += Convert2Digits(thousand[1]);
+                }
+                else
+                {
+                    sum += ConvertUnder21(thousand[1]);
+                }
+
+            }
+
+            //3 digits
+            else if (number.Contains("hundred"))
+            {
+                sum += ConvertUnder21(number.Substring(0, number.IndexOf(' '))) * 100;
                 if (number.Contains("-"))
                 {
                     number = number.Substring(number.LastIndexOf(' ') + 1);
@@ -33,7 +55,7 @@ namespace Exercises
             //Over twenty-one", 21
             else if (number.Contains('-'))//Split the 2 digit number
             {
-                sum = Convert2Digits(number);
+                sum += Convert2Digits(number);
             }
 
             //Under 21
