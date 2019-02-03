@@ -27,9 +27,6 @@ namespace Exercises
                     sum += Convert2Digits(thousand[0]) * 1000; ;
                 }
 
-
-
-                //sum += Convert3Digits(thousand[0]) * 1000;
                 if (thousand[1].Length == 0)
                 {
                     return sum;
@@ -43,7 +40,6 @@ namespace Exercises
             }
 
             //5-digits
-            //eighty-seven thousand and six hundred and fifty-four", 87654
             else if (number.Contains("thousand"))
             {
                 string[] thousand2 = number.Split(" thousand");
@@ -60,35 +56,21 @@ namespace Exercises
                     sum+= Convert2Digits(thousand2[1]) * 1000;
                 }
 
-                //sum += Convert3Digits(thousand2[0]) * 1000;
-                if (thousand2[1].Length == 0)
+                thousand2[1] = thousand2[1].Substring(5);
+
+                if(dictNumsToWords.ContainsKey(thousand2[1]))
                 {
+                    sum += ConvertUnder21(thousand2[1]);
                     return sum;
                 }
-                else
+                else if(thousand2[1].Contains("-") && !thousand2[1].Contains("and"))
                 {
-                    thousand2[1] = thousand2[1].Substring(5);
-
-                    if(dictNumsToWords.ContainsKey(thousand2[1]))
-                    {
-                        sum += ConvertUnder21(thousand2[1]);
-                        return sum;
-                    }
-                    else if(thousand2[1].Contains("-") && !thousand2[1].Contains("and"))
-                    {
-                        sum += Convert2Digits(thousand2[1]);
-                        return sum;
-                    }
-                    sum += Convert3Digits(thousand2[1]);
+                    sum += Convert2Digits(thousand2[1]);
                     return sum;
                 }
-
             }
 
-                //4 digits
-                //three thousand and four", 3004
-                //five thousand and twenty-six", 5026
-                //seven thousand and one hundred and eleven", 7111
+            //4 digits
             else if (number.Contains(" thousand and "))
             {
                 string[] thousand = number.Split(" thousand");
@@ -102,7 +84,6 @@ namespace Exercises
                 sum += Convert3Digits(number);
             }
 
-
             //Over twenty-one", 21
             else if (number.Contains('-'))//Split the 2 digit number
             {
@@ -115,9 +96,7 @@ namespace Exercises
                 sum += ConvertUnder21(number);
             }
 
-
             return sum;
-
         }
 
         public int Convert3Digits(string number)
@@ -137,7 +116,6 @@ namespace Exercises
             }
 
             return sum;
-
         }
 
         public int Convert2Digits(string number)
@@ -156,7 +134,6 @@ namespace Exercises
         {
             return dictNumsToWords[number];
         }
-
 
         //Create dictionary
         Dictionary<string, int> dictNumsToWords = new Dictionary<string, int>();
