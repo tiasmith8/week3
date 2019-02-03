@@ -48,5 +48,16 @@ namespace Exercises.Test
             Assert.AreEqual(expected, actual, message);
         }
 
+        [DataTestMethod]
+        [DataRow("three thousand and four", 3004, "three thousand and four returns 3004")]
+        [DataRow("five thousand and twenty-six", 5026, "five thousand and twenty-six returns 5026")]
+        [DataRow("seven thousand and one hundred and eleven", 7111, "seven thousand and one hundred and eleven returns 7111")]
+        public void Convert_4_Digit_Words(string num, int expected, string message)
+        {
+            WordsToNumbers ntw = new WordsToNumbers();
+            int actual = ntw.Convert(num);
+            Assert.AreEqual(expected, actual, message);
+        }
+
     }
 }
