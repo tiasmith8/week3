@@ -78,6 +78,20 @@ namespace Exercises.Test
             string actual = ntw.Convert(num);
             Assert.AreEqual(expected, actual, message);
         }
+        //6 digit numbers 
+        //6 digit numbers (five hundred thousand, eight hundred and three thousand 
+        //and three hundred and eight, nine hundred and ninety-nine thousand 
+        //and nine-hundred and ninety-nine)
+        [DataTestMethod]
+        [DataRow(500000, "five hundred thousand", "500_000 returns five hundred thousand")]
+        [DataRow(803308, "eight hundred and three thousand and three hundred and eight", "eight hundred and three thousand and three hundred and eight")]
+        [DataRow(999999, "nine hundred and ninety-nine thousand and nine-hundred and ninety-nine", "nine hundred and ninety-nine thousand and nine-hundred and ninety-nine")]
+        public void Convert_6_Digit_Numbers_To_Words(int num, string expected, string message)
+        {
+            NumbersToWords ntw = new NumbersToWords();
+            string actual = ntw.Convert(num);
+            Assert.AreEqual(expected, actual, message);
+        }
 
     }
 }
