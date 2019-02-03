@@ -85,66 +85,6 @@ namespace Exercises
 
             }
 
-
-                //if(thousand[0].Contains(" hundred"))
-                //{
-                //    string[] first3Split = thousand[0].Split(" hundred");
-                //    sum += ConvertUnder21(first3Split[0]) * 100000;
-                //    if(thousand[1].Length>0)
-                //    {
-                //        number = thousand[1].Substring(5);
-                //        sum+=Convert3Digits(number);
-
-                //        if (thousand[1].Contains('-'))
-                //        {
-                //            sum += Convert2Digits(thousand[1]) * 1000;
-                //        }
-                //        else
-                //        {
-                //            sum += ConvertUnder21(thousand[1]) * 1000;
-                //        }
-                //    }
-                //    return sum;
-                //}
-
-
-
-            //    if (thousand[0].Contains('-'))
-            //    {
-            //        sum+= Convert2Digits(thousand[0]) * 1000;     
-            //    }
-            //    else
-            //    {
-            //        sum += ConvertUnder21(thousand[0]) * 1000;
-            //    }
-            //    if(thousand[1].Length>0)
-            //    {
-            //        number = thousand[1].Substring(5);
-            //    }
-            //    else
-            //    {
-            //        return sum;
-            //    }
-                
-            //    if (number.Contains(" hundred and "))
-            //    {   //		number	"six hundred and fifty-four"	string
-
-            //        string[] hundred = number.Split(" hundred and ");
-            //        sum += dictNumsToWords[hundred[0]] * 100;
-            //        number = hundred[1];
-            //    }
-            //    if(number.Contains('-'))
-            //    {
-            //        sum += Convert2Digits(number);
-            //    }
-            //    else
-            //    {
-            //        sum += ConvertUnder21(number);
-            //    }
-            //        return sum;
-                
-            //}
-
                 //4 digits
                 //three thousand and four", 3004
                 //five thousand and twenty-six", 5026

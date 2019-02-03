@@ -79,5 +79,18 @@ namespace Exercises.Test
             int actual = ntw.Convert(num);
             Assert.AreEqual(expected, actual, message);
         }
+
+        [DataTestMethod]
+        [DataRow("five hundred thousand and ten", 500_010, "five hundred thousand return 500_000")]
+        [DataRow("eight hundred and three thousand and eight", 803008, "eight hundred and three thousand and three hundred and eight return 803008")]
+        [DataRow("nine hundred and ninety-nine thousand and nine hundred and nine", 999909, "nine hundred and ninety-nine thousand and nine hundred and ninety-nine returns 999909")]
+        public void Convert_Extra_Words_To_Numbers(string expected, int num, string message)
+        {
+            NumbersToWords ntw = new NumbersToWords();
+            string actual = ntw.Convert(num);
+            Assert.AreEqual(expected, actual, message);
+        }
+
+
     }
 }
