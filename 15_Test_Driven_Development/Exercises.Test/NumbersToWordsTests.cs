@@ -67,5 +67,17 @@ namespace Exercises.Test
             Assert.AreEqual(expected, actual, message);
         }
 
+        //5 digit numbers (forty thousand, eighty-seven thousand and six hundred and fifty-four)
+        [DataTestMethod]
+        [DataRow(40_000, "forty thousand", "40_000 returns forty thousand")]
+        [DataRow(87654, "eighty-seven thousand and six hundred and fifty-four", "5026 returns eighty-seven thousand and six hundred and fifty-four")]
+        //[DataRow(7111, "seven thousand and one hundred and eleven", "7111 returns seven thousand and one hundred and eleven")]
+        public void Convert_5_Digit_Numbers_To_Words(int num, string expected, string message)
+        {
+            NumbersToWords ntw = new NumbersToWords();
+            string actual = ntw.Convert(num);
+            Assert.AreEqual(expected, actual, message);
+        }
+
     }
 }
