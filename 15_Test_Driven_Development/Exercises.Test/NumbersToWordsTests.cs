@@ -54,6 +54,18 @@ namespace Exercises.Test
             string actual = ntw.Convert(num);
             Assert.AreEqual(expected, actual, message);
         }
+        //4 digit numbers (three thousand and four, five thousand and twenty-six, 
+        //seven thousand and one hundred and eleven)
+        [DataTestMethod]
+        [DataRow(3004, "three thousand and four", "3004 returns three thousand and four")]
+        [DataRow(5026, "five thousand and twenty-six", "5026 returns five thousand and twenty-six")]
+        [DataRow(7111, "seven thousand and one hundred and eleven", "7111 returns seven thousand and one hundred and eleven")]
+        public void Convert_4_Digit_Numbers_To_Words(int num, string expected, string message)
+        {
+            NumbersToWords ntw = new NumbersToWords();
+            string actual = ntw.Convert(num);
+            Assert.AreEqual(expected, actual, message);
+        }
 
     }
 }
