@@ -93,5 +93,16 @@ namespace Exercises.Test
             Assert.AreEqual(expected, actual, message);
         }
 
+        [DataTestMethod]
+        [DataRow(500_010, "five hundred thousand and ten", "500_000 returns five hundred thousand")]
+        [DataRow(803008, "eight hundred and three thousand and eight", "eight hundred and three thousand and three hundred and eight")]
+        [DataRow(999909, "nine hundred and ninety-nine thousand and nine hundred and nine", "nine hundred and ninety-nine thousand and nine hundred and ninety-nine")]
+        public void Convert_Extra_Numbers_To_Words(int num, string expected, string message)
+        {
+            NumbersToWords ntw = new NumbersToWords();
+            string actual = ntw.Convert(num);
+            Assert.AreEqual(expected, actual, message);
+        }
+
     }
 }
