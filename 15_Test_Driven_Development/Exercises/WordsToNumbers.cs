@@ -15,12 +15,9 @@ namespace Exercises
             if (number.Contains("thousand") && number.Contains("hundred"))
             {
                 string[] thousand = number.Split(" thousand");
-                if (thousand[0].Contains("hundred")){
-                    sum+= Convert3Digits(thousand[0]) * 1000;
-                }
-                else if(dictNumsToWords.ContainsKey(thousand[0]))
+                if (thousand[0].Contains("hundred"))
                 {
-                    sum += ConvertUnder21(thousand[0]) * 1000; ;
+                    sum += Convert3Digits(thousand[0]) * 1000;
                 }
                 else
                 {
@@ -43,27 +40,22 @@ namespace Exercises
             else if (number.Contains("thousand"))
             {
                 string[] thousand2 = number.Split(" thousand");
-                if(dictNumsToWords.ContainsKey(thousand2[0]))
+                if (dictNumsToWords.ContainsKey(thousand2[0]))
                 {
-                    sum += dictNumsToWords[thousand2[0]] *1000;
-                    if(thousand2[1] == "")//if no more words
+                    sum += dictNumsToWords[thousand2[0]] * 1000;
+                    if (thousand2[1] == "")//if no more words
                     {
                         return sum;
                     }
                 }
                 else
                 {
-                    sum+= Convert2Digits(thousand2[1]) * 1000;
+                    sum += Convert2Digits(thousand2[1]) * 1000;
                 }
 
                 thousand2[1] = thousand2[1].Substring(5);
 
-                if(dictNumsToWords.ContainsKey(thousand2[1]))
-                {
-                    sum += ConvertUnder21(thousand2[1]);
-                    return sum;
-                }
-                else if(thousand2[1].Contains("-") && !thousand2[1].Contains("and"))
+                if (!thousand2[1].Contains("and"))
                 {
                     sum += Convert2Digits(thousand2[1]);
                     return sum;
@@ -75,7 +67,7 @@ namespace Exercises
             {
                 string[] thousand = number.Split(" thousand");
                 sum += dictNumsToWords[thousand[0]] * 1000;
-                sum+=Convert3Digits(number);
+                sum += Convert3Digits(number);
             }
 
             //3 digits
@@ -84,16 +76,10 @@ namespace Exercises
                 sum += Convert3Digits(number);
             }
 
-            //Over twenty-one", 21
-            else if (number.Contains('-'))//Split the 2 digit number
+            //2 digits
+            else 
             {
                 sum += Convert2Digits(number);
-            }
-
-            //Under 21
-            else //(dictNumsToWords.ContainsKey(number))
-            {
-                sum += ConvertUnder21(number);
             }
 
             return sum;
@@ -121,6 +107,12 @@ namespace Exercises
         public int Convert2Digits(string number)
         {
             int sum = 0;
+
+            if(dictNumsToWords.ContainsKey(number))
+            {
+                return dictNumsToWords[number];
+            }
+
             string[] split2DigitNumber = number.Split("-");
             foreach (string s in split2DigitNumber)
             {
